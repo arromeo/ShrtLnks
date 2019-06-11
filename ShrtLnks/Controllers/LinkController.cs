@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ShrtLnks.Data;
 using ShrtLnks.Models;
+using ShrtLnks.ViewModels;
 
 namespace ShrtLnks.Controllers
 {
@@ -93,8 +94,7 @@ namespace ShrtLnks.Controllers
 
             LinkEditViewModel linkEditViewModel = new LinkEditViewModel()
             {
-                Link = link,
-                UserId = currentUser.Id
+                Link = link
             };
 
             return View(linkEditViewModel);
@@ -116,7 +116,7 @@ namespace ShrtLnks.Controllers
                 return NotFound();
             }
 
-            link.LongUrl = linkEditViewModel.longUrl;
+            link.LongUrl = linkEditViewModel.Link.LongUrl;
 
             try
             {
