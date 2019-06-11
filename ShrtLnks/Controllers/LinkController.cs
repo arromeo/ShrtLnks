@@ -137,6 +137,34 @@ namespace ShrtLnks.Controllers
             return RedirectToAction(nameof(Dashboard));
         }
 
+        // GET: links/delete/{id}
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var link = await _context.Link.FirstOrDefaultAsync(l => l.LinkId == id);
+            if (link == null)
+            {
+                return NotFound();
+            }
+
+            return View(link);
+        }
+
+        // POST: links/delete/{id}
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var link = await _context.Link.FindAsync(id);
+            _context.Link.Remove(link);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Dashboard));
+        }
+
         private bool LinkExists(int id)
         {
             return _context.Link.Any(e => e.LinkId == id);
