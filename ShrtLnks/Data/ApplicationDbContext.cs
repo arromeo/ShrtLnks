@@ -12,5 +12,7 @@ namespace ShrtLnks.Data
             : base(options)
         {
         }
+
+        public DbSet<ShrtLnks.Models.Link> Link { get; set; }
     }
 }
