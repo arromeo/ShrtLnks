@@ -72,6 +72,10 @@ namespace ShrtLnks
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(
+                    name: "dashboard",
+                    template: "dashboard",
+                    defaults: new { controller = "link", action = "dashboard" });
             });
         }
     }
