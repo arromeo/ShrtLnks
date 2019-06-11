@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -32,7 +31,12 @@ namespace ShrtLnks.Controllers
 
             var links = await _context.Link.Where(l => l.OwnerId == currentUserId).ToListAsync();
 
-            return View(links);
+            DashboardViewModel dashboardViewModel = new DashboardViewModel()
+            {
+                Links = links
+            };
+
+            return View(dashboardViewModel);
         }
 
         // GET: Links/Create
