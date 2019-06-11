@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ShrtLnks.Data;
+using ShrtLnks.Models;
 
 namespace ShrtLnks.Controllers
 {
@@ -22,6 +23,8 @@ namespace ShrtLnks.Controllers
             _userManager = userManager;
         }
 
+
+        // GET: Links
         public async Task<IActionResult> Dashboard()
         {
             string currentUserId = _userManager.GetUserId(User);
@@ -29,6 +32,56 @@ namespace ShrtLnks.Controllers
             var links = await _context.Link.Where(l => l.OwnerId == currentUserId).ToListAsync();
 
             return View(links);
+        }
+
+        // GET: Links/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Links/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("longUrl"] string longUrl)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            string shortUrl = "";
+            while(shortUrl == "")
+            {
+                string testString = RandomStringGenerator();
+                bool doesExist = await _context.Link.AnyAsync(l => l.ShortUrl == testString);
+
+                if (!doesExist)
+                    shortUrl = testString;
+            }
+
+            Link link = new Link()
+            {
+                OwnerId = (currentUser == null) ? "Anonymous" : currentUser.Id,
+                LongUrl = longUrl,
+                ShortUrl = shortUrl,
+                CreateAt = DateTime.Now
+            };
+
+            _context.Add(link);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Dashboard));
+        }
+
+        private static string RandomStringGenerator()
+        {
+            Random random = new Random();
+
+            const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, 7)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 
