@@ -43,7 +43,7 @@ namespace ShrtLnks.Controllers
         // POST: Links/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("longUrl"] string longUrl)
+        public async Task<IActionResult> Create([Bind("longUrl")] string longUrl)
         {
             if (!ModelState.IsValid)
             {
@@ -73,6 +73,73 @@ namespace ShrtLnks.Controllers
             _context.Add(link);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Dashboard));
+        }
+
+        // GET: Links/Edit/{id}
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var link = await _context.Link.FindAsync(id);
+            if (link == null)
+            {
+                return NotFound();
+            }
+
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            LinkEditViewModel linkEditViewModel = new LinkEditViewModel()
+            {
+                Link = link,
+                UserId = currentUser.Id
+            };
+
+            return View(linkEditViewModel);
+        }
+
+        // POST: Links/Edit/{id}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("LongUrl")] LinkEditViewModel linkEditViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(linkEditViewModel);
+            }
+
+            var link = await _context.Link.FindAsync(id);
+            if (link == null)
+            {
+                return NotFound();
+            }
+
+            link.LongUrl = linkEditViewModel.longUrl;
+
+            try
+            {
+                _context.Update(link);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!LinkExists(link.LinkId))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Dashboard));
+        }
+
+        private bool LinkExists(int id)
+        {
+            return _context.Link.Any(e => e.LinkId == id);
         }
 
         private static string RandomStringGenerator()
