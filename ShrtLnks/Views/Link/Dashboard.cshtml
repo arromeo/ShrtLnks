@@ -5,3 +5,33 @@
 }
 
 <h2>Dashboard</h2>
+<div class="container">
+    <div class="table-container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">ShortUrl</th>
+                    <th scope="col">LongUrl</th>
+                    <th scope="col"><span class="float-right">Actions</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Links)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LongUrl)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ShortUrl)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.LinkId">Edit</a> |
+                            <a asp-action="Delete" asp-route-id="@item.LinkId">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
