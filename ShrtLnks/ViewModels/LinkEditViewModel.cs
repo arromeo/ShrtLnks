@@ -4,6 +4,6 @@ namespace ShrtLnks.ViewModels
 {
     public class LinkEditViewModel
     {
-        public Link Link {get; set;}
+        public Link Link { get; set; }
     }
 }

@@ -107,20 +107,17 @@ namespace ShrtLnks.Controllers
         // POST: Links/Edit/{id}
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("LongUrl")] LinkEditViewModel linkEditViewModel)
+        public async Task<IActionResult> Edit(int id, [Bind("LinkId,OwnerId,LongUrl,ShortUrl,CreateAt")] Link link)
         {
             if (!ModelState.IsValid)
             {
-                return View(linkEditViewModel);
+                return View(link);
             }
 
-            var link = await _context.Link.FindAsync(id);
             if (link == null)
             {
                 return NotFound();
             }
-
-            link.LongUrl = linkEditViewModel.Link.LongUrl;
 
             try
             {
