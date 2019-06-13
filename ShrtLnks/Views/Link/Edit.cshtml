@@ -11,7 +11,7 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Link.LinkId" />
-            <input asp-for="Link.OwnerId" class="form-control" />
+            <input type="hidden" asp-for="Link.OwnerId" class="form-control" />
             <div class="form-group">
                 <label asp-for="Link.LongUrl" class="control-label"></label>
                 <input asp-for="Link.LongUrl" class="form-control" />
