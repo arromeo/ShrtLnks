@@ -24,7 +24,7 @@ namespace ShrtLnks.Controllers
         }
 
 
-        // GET: Links
+        // GET: link
         public async Task<IActionResult> Dashboard()
         {
             string currentUserId = _userManager.GetUserId(User);
@@ -39,13 +39,13 @@ namespace ShrtLnks.Controllers
             return View(dashboardViewModel);
         }
 
-        // GET: Links/Create
+        // GET: link/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Links/Create
+        // POST: link/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("longUrl")] string longUrl)
@@ -58,7 +58,7 @@ namespace ShrtLnks.Controllers
             var currentUser = await _userManager.GetUserAsync(User);
 
             string shortUrl = "";
-            while(shortUrl == "")
+            while (shortUrl == "")
             {
                 string testString = RandomStringGenerator();
                 bool doesExist = await _context.Link.AnyAsync(l => l.ShortUrl == testString);
@@ -77,10 +77,11 @@ namespace ShrtLnks.Controllers
 
             _context.Add(link);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Dashboard));
+
+            return RedirectToAction(nameof(Details), new { id = link.LinkId } );
         }
 
-        // GET: Links/Edit/{id}
+        // GET: link/Edit/{id}
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -104,7 +105,7 @@ namespace ShrtLnks.Controllers
             return View(linkEditViewModel);
         }
 
-        // POST: Links/Edit/{id}
+        // POST: link/Edit/{id}
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("LinkId,OwnerId,LongUrl,ShortUrl,CreateAt")] Link link)
@@ -138,7 +139,7 @@ namespace ShrtLnks.Controllers
             return RedirectToAction(nameof(Dashboard));
         }
 
-        // GET: links/delete/{id}
+        // GET: link/delete/{id}
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -155,7 +156,7 @@ namespace ShrtLnks.Controllers
             return View(link);
         }
 
-        // POST: links/delete/{id}
+        // POST: link/delete/{id}
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -164,6 +165,24 @@ namespace ShrtLnks.Controllers
             _context.Link.Remove(link);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Dashboard));
+        }
+
+        //GET: links/details/{id}
+        public async Task<IActionResult> Details(int id)
+        {
+            var link = await _context.Link.FindAsync(id);
+            if (link == null)
+            {
+                return NotFound();
+            }
+
+            var currentUser = await _userManager.GetUserAsync(User);
+            if (link.OwnerId != currentUser.Id)
+            {
+                return RedirectToAction(nameof(Dashboard));
+            }
+
+            return View(link);
         }
 
         private bool LinkExists(int id)

@@ -1,9 +1,5 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
+﻿// Finds links to copy URLs to clipboard and adds event listener
 const links = document.getElementsByClassName("copy-link");
-
 if (links.length > 0) {
     for (let i = 0; i < links.length; i++) {
         links[i].addEventListener("click", function (event) {
