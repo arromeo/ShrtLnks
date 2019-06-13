@@ -27,6 +27,22 @@
     height: auto;
 }
 
+.logout-btn {
+    font-size: 1.8rem;
+    padding: 15px 0px 15px 15px;
+    margin: 0px;
+    border: none;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav > li > a:hover {
+    background-color: transparent;
+}
+
 .navbar-link-container {
     display: inline-flex;
     padding-left: 2rem;
