@@ -26,6 +26,7 @@
                             @Html.DisplayFor(modelItem => item.LongUrl)
                         </td>
                         <td>
+                            <a class="copy-link" id="@item.ShortUrl" href="#">Copy</a> |
                             <a asp-action="Edit" asp-route-id="@item.LinkId">Edit</a> |
                             <a asp-action="Delete" asp-route-id="@item.LinkId">Delete</a>
                         </td>
