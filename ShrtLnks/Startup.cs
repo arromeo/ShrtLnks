@@ -76,6 +76,10 @@ namespace ShrtLnks
                     name: "dashboard",
                     template: "dashboard",
                     defaults: new { controller = "link", action = "dashboard" });
+                routes.MapRoute(
+                    name: "redirect",
+                    template: "{shortUrl}",
+                    defaults: new { controller = "redirect", action = "link", shortUrl = "Index" });
             });
         }
     }
