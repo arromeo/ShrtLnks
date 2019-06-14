@@ -11,7 +11,11 @@
     <title>@ViewData["Title"] - ShrtLnks</title>
 
     <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />*@
+        <link rel="stylesheet"
+              href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+              crossorigin="anonymous" />
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment exclude="Development">
@@ -22,27 +26,71 @@
     </environment>
 </head>
 <body>
-    <div class="navbar-container">
-        <div class="container">
-            <nav class="navbar">
-                <div class="navbar-inner-container">
+    @*<div class="navbar-container">
+            <div class="container">
+                <nav class="navbar">
+                    <div class="navbar-inner-container">
 
-                    <div class="navbar-left-container">
-                        <img class="navbar-logo" src="~/images/shrtlnks_logo.svg" alt="Short Links Logo" />
-                        <div class="navbar-link-container">
+                        <div class="navbar-left-container">
+                            <img class="navbar-logo" src="~/images/shrtlnks_logo.svg" alt="Short Links Logo" />
+                            <div class="navbar-link-container">
+                                @if (SignInManager.IsSignedIn(User))
+                                {
+                                    <a class="nav-link" asp-area="" asp-controller="Link" asp-action="Dashboard">Dashboard</a>
+                                }
+                                else
+                                {
+                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                }
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">About</a>
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
+                            </div>
+                        </div>
+                        <partial name="_LoginPartial" />
+                    </div>
+                </nav>
+            </div>
+        </div>*@
+
+    <div class="nav-container">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-dark indigo">
+                <a class="navbar-brand" href="#">
+                    <img class="navbar-logo"
+                         src="~/images/shrtlnks_logo.svg"
+                         alt="Short Links Logo" />
+                </a>
+                <button class="navbar-toggler"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#navbarText"
+                        aria-controls="navbarText"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
                             @if (SignInManager.IsSignedIn(User))
                             {
-                                <a class="nav-link" asp-area="" asp-controller="Link" asp-action="Dashboard">Dashboard</a>
+                                <a class="btn my-nav-link" asp-area="" asp-controller="Link" asp-action="Dashboard">Dashboard</a>
                             }
                             else
                             {
-                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                <a class="btn my-nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                             }
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">About</a>
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
-                        </div>
-                    </div>
-                    <partial name="_LoginPartial" />
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn my-nav-link" asp-area="" asp-controller="Home" asp-action="About">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn my-nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
+                        </li>
+                    </ul>
+                    <span>
+                        <partial name="_LoginPartial" />
+                    </span>
                 </div>
             </nav>
         </div>
@@ -59,9 +107,18 @@
     </div>
 
     <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
+        @*<script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>*@
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                crossorigin="anonymous"></script>
     </environment>
     <environment exclude="Development">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"

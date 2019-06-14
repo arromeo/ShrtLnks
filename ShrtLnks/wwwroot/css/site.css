@@ -7,71 +7,17 @@
     padding-right: 15px;
 }
 
-.navbar {
-    margin-bottom: 0px;
-    height: 70px;
-}
-.navbar-container {
+.nav-container {
     background-color: #dddddd;
 }
 
-.navbar-inner-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
+.my-nav-link {
+    color: #777777;
+    padding-right: 0px;
 }
 
-.navbar-logo {
-    width: 150px;
-    height: auto;
-}
-
-.logout-btn {
-    font-size: 1.8rem;
-    padding: 15px 0px 15px 15px;
-    margin: 0px;
-    border: none;
-}
-
-.navbar-nav {
-    display: flex;
-    align-items: center;
-}
-
-.nav > li > a:hover {
-    background-color: transparent;
-}
-
-.navbar-link-container {
-    display: inline-flex;
-    padding-left: 2rem;
-}
-
-.navbar-link-container > a {
-    padding-left: 1rem;
-}
-
-.navbar-left-container {
-    display: inline-flex;
-    align-items: center;
-    height: 100%;
-}
-
-.nav-link:link,
-.nav-link:visited {
-    text-decoration: none;
-    font-size: 1.8rem;
-    color: #000000;
-}
-
-.nav-link:hover {
-    color: #0056b3;
-}
-
-.login-link:link {
-    text-decoration: none;
-    font-size: 1.8rem;
+.collapse.show {
+    visibility: visible;
 }
 
 .modal-title {
