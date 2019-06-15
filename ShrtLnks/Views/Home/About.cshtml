@@ -1,7 +1,49 @@
 ﻿@{
     ViewData["Title"] = "About";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
 
-<p>Use this area to provide additional information.</p>
+<h1 id="shrtlnks">ShrtLnks</h1>
+
+<p>ShrtLnks is a link shortening service built using ASP.NET Core MVC. Users can create an account, shorten their links and manage all of their previous links which includes editing where they redirect to and deleting it. For more information, check out the <a href="https://github.com/arromeo/ShrtLnks">Github Repo</a>.</p>
+
+<h2 id="goal">Goal</h2>
+
+<p>The goal of this project was to begin learning ASP.NET as well as other .NET concepts such as Entity Framework, Linq and dependency injection. The MVP of this project was about as simple as it gets, with a single CRUD controller for handling links, the built in Identity authentication setup and a simple controller to handle redirects.</p>
+
+<h2 id="gettingstarted">Getting Started</h2>
+
+<p>These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.</p>
+
+<h3 id="prerequisites">Prerequisites</h3>
+
+<p>To install and run this project you will need a machine running Windows with the .NET SDK. The project currently uses LocalDb which it's my understanding is only available on Windows. I plan on switching the database provider and will update this README when that is done.</p>
+
+<h3 id="installing">Installing</h3>
+
+<ol>
+    <li>Clone this project onto your local machine.</li>
+
+    <li>In a terminal, navigate to the project folder <code>/ShrtLnks/ShrtLnks</code> and run <code>dotnet restore</code> to download the project dependencies.</li>
+
+    <li>Run <code>dotnet ef database update</code> to create the necessary database and tables.</li>
+
+    <li>Start the project by running <code>dotnet run</code> and in your browser of choice navigate to <code>localhost:5000</code>.</li>
+</ol>
+
+<h2 id="contributing">Contributing</h2>
+
+<p>Being that this was my first attempt at a ASP.NET project, I'm certain there are mistakes that were made and patterns that were missed. I would be very appreciative to hear some critical analysis of my code to help me be a better programmer and to improve faster.</p>
+
+<h2 id="authors">Authors</h2>
+
+<ul>
+    <li><strong>Adam Romeo</strong> - <em>Everything</em> - <a href="https://adamromeo.dev/">Portfolio</a></li>
+</ul>
+
+<h2 id="resources">Resources</h2>
+
+<ul>
+    <li>The book Programming ASP.NET Core by Dino Esposito</li>
+
+    <li>YouTuber <a href="https://www.youtube.com/user/kudvenkat">kudvenkat's</a> fantastic C# and ASP.NET videos</li>
+</ul>

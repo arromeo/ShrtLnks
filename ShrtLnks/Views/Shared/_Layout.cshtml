@@ -11,7 +11,6 @@
     <title>@ViewData["Title"] - ShrtLnks</title>
 
     <environment include="Development">
-        @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />*@
         <link rel="stylesheet"
               href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -19,39 +18,14 @@
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment exclude="Development">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <link rel="stylesheet"
+              href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+              crossorigin="anonymous" />
+        <link rel="stylesheet" href="~/css/site.css" />
     </environment>
 </head>
 <body>
-    @*<div class="navbar-container">
-            <div class="container">
-                <nav class="navbar">
-                    <div class="navbar-inner-container">
-
-                        <div class="navbar-left-container">
-                            <img class="navbar-logo" src="~/images/shrtlnks_logo.svg" alt="Short Links Logo" />
-                            <div class="navbar-link-container">
-                                @if (SignInManager.IsSignedIn(User))
-                                {
-                                    <a class="nav-link" asp-area="" asp-controller="Link" asp-action="Dashboard">Dashboard</a>
-                                }
-                                else
-                                {
-                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                                }
-                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">About</a>
-                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
-                            </div>
-                        </div>
-                        <partial name="_LoginPartial" />
-                    </div>
-                </nav>
-            </div>
-        </div>*@
-
     <div class="nav-container">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-dark indigo">
@@ -83,9 +57,6 @@
                         </li>
                         <li class="nav-item">
                             <a class="btn my-nav-link" asp-area="" asp-controller="Home" asp-action="About">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn my-nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
                         </li>
                     </ul>
                     <span>
