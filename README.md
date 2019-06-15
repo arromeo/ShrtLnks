@@ -1,6 +1,6 @@
 ﻿# ShrtLnks
 
-ShrtLnks is a link shortening service built using ASP.NET Core MVC. Users can create an account, shorten their links and manage all of their previous links which includes editing where they redirect to and deleting it.
+ShrtLnks is a link shortening service built using ASP.NET Core MVC. Users can create an account, shorten their links and manage all of their previous links which includes editing where they redirect to and deleting them.
 
 ## Goal
 
