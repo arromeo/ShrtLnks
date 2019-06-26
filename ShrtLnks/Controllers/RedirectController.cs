@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ShrtLnks.Data;
 
@@ -16,6 +17,7 @@ namespace ShrtLnks.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         public IActionResult Link(string shortUrl)
         {
             var link = _context.Link.FirstOrDefault(l => l.ShortUrl == shortUrl);
