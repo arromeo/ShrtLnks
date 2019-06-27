@@ -26,6 +26,7 @@ namespace ShrtLnks.Controllers
         }
 
         [AllowAnonymous]
+        [HttpPost]
         public async Task<IActionResult> Create([Bind("longUrl")] string longUrl)
         {
             if (!ModelState.IsValid)
