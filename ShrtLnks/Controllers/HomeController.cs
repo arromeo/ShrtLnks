@@ -34,15 +34,7 @@ namespace ShrtLnks.Controllers
                 return View();
             }
 
-            string shortUrl = "";
-            while (shortUrl == "")
-            {
-                string testString = RandomStringGenerator();
-                bool doesExist = await _context.Link.AnyAsync(l => l.ShortUrl == testString);
-
-                if (!doesExist)
-                    shortUrl = testString;
-            }
+            string shortUrl = await RandomStringGenerator();
 
             Link link = new Link()
             {
@@ -89,13 +81,21 @@ namespace ShrtLnks.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        private static string RandomStringGenerator()
+        private async Task<string> RandomStringGenerator()
         {
-            Random random = new Random();
-
             const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            return new string(Enumerable.Repeat(chars, 7)
-              .Select(s => s[random.Next(s.Length)]).ToArray());
+            string shortUrl = "";
+            while (shortUrl == "")
+            {
+                Random random = new Random();
+                string testString = new string(Enumerable.Repeat(chars, 7).Select(s => s[random.Next(s.Length)]).ToArray());
+                bool doesExist = await _context.Link.AnyAsync(l => l.ShortUrl == testString);
+
+                if (!doesExist)
+                    shortUrl = testString;
+            }
+
+            return shortUrl;
         }
     }
 }
